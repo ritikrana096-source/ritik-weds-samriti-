@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ritik &amp; Samriti — Wedding Invitation</title>
+    
+    <!-- Open Graph / WhatsApp & Social Link Preview Meta Tags -->
+    <meta name="description" content="With the blessings of Smt. Brahmi Devi & Sh. Jai Singh Rana, you are cordially invited to the Marriage Ceremony of Ritik & Samriti (December 3rd – 6th, 2026). Tap the wax seal to open.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ritik & Samriti — Wedding Invitation">
+    <meta property="og:description" content="Tap the wax seal to open your personal invitation, Golden Moments schedule, and venue directions (Dec 3–6, 2026).">
+    <meta name="theme-color" content="#6B1324">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cormorant Garamond, Cinzel, Great Vibes & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tone.js for gentle ambient music -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ivory: '#FAF6F0',
+                        cream: '#F3ECE1',
+                        parchment: '#EAE0D2',
+                        burgundy: '#6B1324',
+                        burgundyDark: '#4A0B17',
+                        gold: '#B88938',
+                        goldLight: '#D8B467',
+                        charcoal: '#2C2220',
+                        taupe: '#7A6C65'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        display: ['"Cinzel"', 'serif'],
+                        script: ['"Great Vibes"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Paper Texture & Fine Grain */
+        .paper-texture {
+            background-color: #FAF6F0;
+            background-image: 
+                radial-gradient(rgba(184, 137, 56, 0.06) 1px, transparent 0),
+                radial-gradient(rgba(107, 19, 36, 0.03) 1px, transparent 0);
+            background-size: 28px 28px;
+            background-position: 0 0, 14px 14px;
+        }
+
+        .envelope-paper {
+            background-color: #EFE8DC;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.09'/%3E%3C/svg%3E");
+        }
+
+        /* Envelope Flap Geometry & Animations */
+        .envelope-wrapper {
+            perspective: 1400px;
+        }
+
+        .flap-top {
+            clip-path: polygon(0 0, 100% 0, 50% 54%);
+            transform-origin: top center;
+            transition: transform 1.25s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.4s;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .flap-left {
+            clip-path: polygon(0 0, 52% 50%, 0 100%);
+        }
+
+        .flap-right {
+            clip-path: polygon(100% 0, 48% 50%, 100% 100%);
+        }
+
+        .flap-bottom {
+            clip-path: polygon(0 100%, 50% 46%, 100% 100%);
+        }
+
+        .envelope-open .flap-top {
+            transform: rotateX(180deg);
+            z-index: 0 !important;
+        }
+
+        .envelope-open .wax-seal-btn {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.75);
+            pointer-events: none;
+        }
+
+        /* Realistic Wax Seal Styling */
+        .wax-seal {
+            background: radial-gradient(circle at 32% 30%, #FDFBF7 0%, #EFE9DF 55%, #D5CBBF 88%, #BFB3A4 100%);
+            box-shadow: 
+                0 10px 25px rgba(44, 34, 32, 0.25),
+                inset 0 2px 5px rgba(255, 255, 255, 0.9),
+                inset 0 -3px 8px rgba(138, 124, 108, 0.45);
+            border-radius: 52% 48% 54% 46% / 47% 53% 47% 53%;
+            transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .wax-seal:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+            box-shadow: 
+                0 14px 30px rgba(107, 19, 36, 0.25),
+                inset 0 2px 5px rgba(255, 255, 255, 0.95),
+                inset 0 -3px 8px rgba(138, 124, 108, 0.5);
+        }
+
+        .wax-seal-inner {
+            border: 1.5px solid rgba(184, 137, 56, 0.35);
+            box-shadow: inset 0 2px 4px rgba(110, 96, 80, 0.25), 0 1px 1px rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+        }
+
+        /* Gentle Floating & Sway Animations */
+        @keyframes swaySlow {
+            0%, 100% { transform: rotate(-1.8deg); }
+            50% { transform: rotate(1.8deg); }
+        }
+
+        @keyframes pulseSubtle {
+            0%, 100% { opacity: 0.65; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
+        .animate-sway {
+            transform-origin: top center;
+            animation: swaySlow 5.5s ease-in-out infinite;
+        }
+
+        .animate-sway-delay {
+            transform-origin: top center;
+            animation: swaySlow 6.5s ease-in-out 1.2s infinite;
+        }
+
+        .animate-tap-hint {
+            animation: pulseSubtle 2.4s ease-in-out infinite;
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1), transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF6F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D8B467;
+            border-radius: 9999px;
+        }
+    </style>
+</head>
+<body class="bg-[#1C1715] text-charcoal font-serif antialiased selection:bg-burgundy selection:text-ivory overflow-x-hidden">
+
+    <!-- Main Mobile-First Luxury Container (Centered Card Experience on Desktop, Full-bleed on Mobile) -->
+    <div id="app-shell" class="relative mx-auto w-full max-w-[460px] min-h-screen paper-texture shadow-[0_0_60px_rgba(0,0,0,0.6)] overflow-x-hidden">
+
+        <!-- ========================================================= -->
+        <!-- 1. WAX-SEALED ENVELOPE OVERLAY (Tap the Seal to Open)     -->
+        <!-- ========================================================= -->
+        <div id="envelope-screen" class="fixed inset-0 z-50 mx-auto w-full max-w-[460px] h-full envelope-wrapper transition-opacity duration-1000 ease-out flex items-center justify-center overflow-hidden">
+            
+            <!-- Base Backing -->
+            <div class="absolute inset-0 envelope-paper"></div>
+
+            <!-- Envelope Side Flaps -->
+            <div class="absolute inset-0 flap-left bg-[#E8DFD1] shadow-inner"></div>
+            <div class="absolute inset-0 flap-right bg-[#E5DBC9] shadow-inner"></div>
+            
+            <!-- Envelope Bottom Flap -->
+            <div class="absolute inset-0 flap-bottom bg-[#ECE4D7] drop-shadow-[0_-4px_12px_rgba(44,34,32,0.08)]"></div>
+
+            <!-- Envelope Top Flap (Animates Open) -->
+            <div id="envelope-top-flap" class="absolute inset-0 flap-top bg-[#F4EDE2] z-20 drop-shadow-[0_10px_20px_rgba(44,34,32,0.16)]">
+                <!-- Subtle Gold Foil Inner Edge -->
+                <div class="w-full h-full border-b border-gold/30"></div>
+            </div>
+
+            <!-- Interactive Botanical & Monogram Wax Seal -->
+            <button id="open-seal-btn" aria-label="Tap the seal to open wedding invitation" class="wax-seal-btn wax-seal absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-28 h-28 flex items-center justify-center cursor-pointer focus:outline-none group">
+                <div class="wax-seal-inner w-[86px] h-[86px] flex flex-col items-center justify-center relative">
+                    <!-- Embossed Botanical Sprig SVG -->
+                    <svg class="w-12 h-12 text-burgundy/80 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3">
+                        <path d="M32 54C32 40 31 24 33 10" stroke-linecap="round"/>
+                        <path d="M32 42C24 40 19 35 18 29C24 30 29 35 32 42Z" fill="currentColor" fill-opacity="0.15"/>
+                        <path d="M32 34C40 32 45 27 46 21C40 22 35 27 32 34Z" fill="currentColor" fill-opacity="0.15"/>
+                        <path d="M32 25C25 23 21 19 20 14C25 15 29 19 32 25Z" fill="currentColor" fill-opacity="0.15"/>
+                        <path d="M32 18C37 16 41 13 42 9C38 10 34 13 32 18Z" fill="currentColor" fill-opacity="0.15"/>
+                        <circle cx="33" cy="8" r="1.5" fill="currentColor"/>
+                    </svg>
+                    <span class="font-display text-[9px] tracking-[0.22em] text-burgundy/90 font-semibold -mt-1">R &amp; S</span>
+                </div>
+            </button>
+
+            <!-- Bottom Prompt Text -->
+            <div id="tap-prompt" class="absolute bottom-14 inset-x-0 z-30 text-center pointer-events-none transition-opacity duration-500">
+                <p class="font-display text-[11px] tracking-[0.28em] text-charcoal/75 uppercase animate-tap-hint">
+                    Tap the seal to open
+                </p>
+                <div class="w-8 h-[1px] bg-gold/60 mx-auto mt-2.5"></div>
+            </div>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 2. FLOATING TOP CONTROLS (Sound & Share Toggle)           -->
+        <!-- ========================================================= -->
+        <div id="floating-controls" class="fixed top-4 right-4 sm:right-[calc(50%-212px)] z-40 flex items-center gap-2 opacity-0 pointer-events-none transition-opacity duration-700">
+            <!-- Share Link Button -->
+            <button id="share-invite-btn" title="Share Invitation" class="w-10 h-10 rounded-full bg-ivory/90 backdrop-blur-md border border-gold/30 shadow-md flex items-center justify-center text-burgundy hover:bg-cream transition active:scale-95">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+            </button>
+
+            <!-- Music Toggle Pill -->
+            <button id="music-toggle-btn" title="Toggle Ambient Music" class="w-10 h-10 rounded-full bg-ivory/90 backdrop-blur-md border border-gold/30 shadow-md flex items-center justify-center text-burgundy hover:bg-cream transition active:scale-95">
+                <svg id="icon-sound-on" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                </svg>
+                <svg id="icon-sound-off" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- ========================================================= -->
+        <!-- 3. MAIN INVITATION CONTENT (Reveals After Seal Opens)     -->
+        <!-- ========================================================= -->
+        <main id="invitation-content" class="opacity-0 transition-opacity duration-1000 pb-16">
+
+            <!-- HERO SECTION WITH HANGING FLORALS, LANTERNS & ARCH -->
+            <section class="relative pt-10 pb-8 px-5 overflow-hidden">
+                
+                <!-- Decorative Top-Left Floral Garland & Hanging Brass Lanterns -->
+                <div class="absolute top-0 left-0 w-44 pointer-events-none select-none z-10">
+                    <svg viewBox="0 0 180 230" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                        <path d="M-10 0 C35 15, 75 40, 115 10" stroke="#4D5E47" stroke-width="2.5" stroke-linecap="round"/>
+                        <path d="M15 5 C25 45, 45 75, 25 115" stroke="#4D5E47" stroke-width="2" stroke-linecap="round"/>
+                        <ellipse cx="48" cy="24" rx="14" ry="7" transform="rotate(-25 48 24)" fill="#5C7054"/>
+                        <ellipse cx="78" cy="26" rx="13" ry="6" transform="rotate(15 78 26)" fill="#465840"/>
+                        <ellipse cx="26" cy="58" rx="15" ry="7" transform="rotate(55 26 58)" fill="#5C7054"/>
+                        <ellipse cx="42" cy="42" rx="12" ry="6" transform="rotate(20 42 42)" fill="#73876A"/>
+                        <circle cx="22" cy="22" r="18" fill="#6B1324"/>
+                        <circle cx="22" cy="22" r="11" fill="#8A1C32"/>
+                        <circle cx="22" cy="22" r="5" fill="#4A0B17"/>
+                        <circle cx="56" cy="14" r="14" fill="#E6C3BA"/>
+                        <circle cx="56" cy="14" r="8" fill="#D4A398"/>
+                        <circle cx="16" cy="54" r="13" fill="#DFB5AA"/>
+                        <circle cx="16" cy="54" r="7" fill="#C79285"/>
+
+                        <!-- Hanging Lantern 1 -->
+                        <g class="animate-sway">
+                            <line x1="34" y1="62" x2="34" y2="128" stroke="#B88938" stroke-width="1.2"/>
+                            <path d="M27 128 L41 128 L44 135 L24 135 Z" fill="#B88938"/>
+                            <rect x="25" y="135" width="18" height="26" rx="2" fill="#FFF3D1" stroke="#B88938" stroke-width="1.5"/>
+                            <circle cx="34" cy="148" r="5" fill="#FFCE54" opacity="0.85"/>
+                            <path d="M23 161 L45 161 L39 167 L29 167 Z" fill="#B88938"/>
+                        </g>
+
+                        <!-- Hanging Lantern 2 -->
+                        <g class="animate-sway-delay">
+                            <line x1="76" y1="30" x2="76" y2="85" stroke="#B88938" stroke-width="1.2"/>
+                            <path d="M70 85 L82 85 L85 91 L67 91 Z" fill="#B88938"/>
+                            <rect x="68" y="91" width="16" height="22" rx="2" fill="#FFF3D1" stroke="#B88938" stroke-width="1.5"/>
+                            <circle cx="76" cy="102" r="4.5" fill="#FFCE54" opacity="0.85"/>
+                            <path d="M66 113 L86 113 L81 118 L71 118 Z" fill="#B88938"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Decorative Top-Right Fairy Lights & Foliage -->
+                <div class="absolute top-0 right-0 w-36 pointer-events-none select-none z-10 opacity-85">
+                    <svg viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                        <path d="M145 5 C110 25, 80 20, 45 0" stroke="#B88938" stroke-width="1" stroke-dasharray="2 2"/>
+                        <circle cx="115" cy="17" r="3" fill="#F3C669"/>
+                        <circle cx="88" cy="18" r="2.5" fill="#F3C669"/>
+                        <circle cx="62" cy="9" r="2.5" fill="#F3C669"/>
+                        <ellipse cx="122" cy="12" rx="12" ry="5" transform="rotate(30 122 12)" fill="#5C7054"/>
+                        <circle cx="132" cy="24" r="11" fill="#E6C3BA"/>
+                    </svg>
+                </div>
+
+                <!-- Ornamental Arch Frame -->
+                <div class="relative z-20 mt-4 pt-8 pb-10 px-5 rounded-t-[160px] rounded-b-3xl border border-gold/45 bg-gradient-to-b from-ivory/95 via-ivory/90 to-cream/80 shadow-[0_12px_35px_rgba(107,19,36,0.06)] text-center">
+                    
+                    <!-- Sacred Om Symbol with Gold Dividers -->
+                    <div class="flex items-center justify-center gap-3 mb-4">
+                        <span class="h-[1px] w-10 bg-gradient-to-r from-transparent to-gold"></span>
+                        <span class="text-gold text-2xl font-serif leading-none select-none" title="Om">ॐ</span>
+                        <span class="h-[1px] w-10 bg-gradient-to-l from-transparent to-gold"></span>
+                    </div>
+
+                    <!-- Hosts / Grandparents Blessing -->
+                    <p class="font-serif italic font-semibold text-burgundy text-lg sm:text-xl leading-snug">
+                        Smt. Brahmi Devi &amp; Sh. Jai Singh Rana
+                    </p>
+                    <p class="font-serif text-charcoal/85 text-sm sm:text-base mt-1.5 leading-relaxed max-w-[310px] mx-auto">
+                        cordially request the honour of your presence to grace the auspicious occasion of the Marriage Ceremony of
+                    </p>
+
+                    <!-- Groom Name & Parents -->
+                    <div class="mt-6">
+                        <h1 class="font-script text-6xl sm:text-[68px] text-burgundy leading-none drop-shadow-[0_2px_4px_rgba(107,19,36,0.12)]">
+                            Ritik
+                        </h1>
+                        <p class="font-serif font-medium text-charcoal text-xs sm:text-sm mt-1.5 tracking-wide">
+                            (S/o Smt. Kusum Lata Rana &amp; Sh. Vijay Rana)
+                        </p>
+                    </div>
+
+                    <!-- Decorative "with" & Intertwined Hearts -->
+                    <div class="my-3 flex items-center justify-center gap-3">
+                        <span class="h-[1px] w-8 bg-gold/50"></span>
+                        <span class="font-serif italic text-taupe text-sm">with</span>
+                        <span class="h-[1px] w-8 bg-gold/50"></span>
+                    </div>
+
+                    <!-- Bride Name & Parents -->
+                    <div class="relative">
+                        <h1 class="font-script text-6xl sm:text-[68px] text-burgundy leading-none drop-shadow-[0_2px_4px_rgba(107,19,36,0.12)]">
+                            Samriti
+                        </h1>
+                        <svg class="w-12 h-7 text-burgundy/65 mx-auto -mt-1" viewBox="0 0 60 32" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <path d="M22 14 C22 9, 15 9, 15 14 C15 19, 22 23, 22 23 C22 23, 29 19, 29 14 C29 9, 22 9, 22 14 Z"/>
+                            <path d="M35 12 C35 7, 28 7, 28 12 C28 17, 35 21, 35 21 C35 21, 42 17, 42 12 C42 7, 35 7, 35 12 Z"/>
+                            <path d="M42 13 C48 13, 53 16, 56 20" stroke-linecap="round"/>
+                        </svg>
+                        <p class="font-serif font-medium text-charcoal text-xs sm:text-sm mt-1 tracking-wide">
+                            (D/o Smt. Kamlesh Thakur &amp; Sh. Pawan Thakur)
+                        </p>
+                        <p class="font-serif text-charcoal/85 text-xs sm:text-sm mt-0.5">
+                            Vill Manudhar, Teh. Dharampur, Distt. Mandi, H.P.
+                        </p>
+                    </div>
+
+                    <!-- Ornamental Gold Divider -->
+                    <div class="my-6 flex items-center justify-center gap-2">
+                        <span class="h-[1px] flex-1 max-w-[90px] bg-gradient-to-r from-transparent to-gold/70"></span>
+                        <svg class="w-4 h-4 text-gold" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2L14.8 9.2L22 12L14.8 14.8L12 22L9.2 14.8L2 12L9.2 9.2L12 2Z"/>
+                        </svg>
+                        <span class="h-[1px] flex-1 max-w-[90px] bg-gradient-to-l from-transparent to-gold/70"></span>
+                    </div>
+
+                    <!-- Primary Wedding Residence / Venue -->
+                    <div>
+                        <p class="font-serif italic text-taupe text-base">at their residence</p>
+                        <p class="font-serif font-bold text-burgundy text-base sm:text-lg mt-0.5">
+                            10, Palm City, Sector 127, Chandigarh
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 4. LIVE COUNTDOWN SECTION                                 -->
+            <!-- ========================================================= -->
+            <section class="px-5 py-6 reveal-up">
+                <div class="rounded-3xl bg-cream/90 border border-gold/35 p-6 text-center shadow-[0_8px_25px_rgba(44,34,32,0.05)] relative overflow-hidden">
+                    <p class="font-display text-[10px] tracking-[0.26em] text-taupe uppercase">
+                        To The Most Special Day Of Our Lives
+                    </p>
+                    <h2 class="font-display text-2xl tracking-[0.16em] text-burgundy font-semibold mt-1">
+                        COUNTDOWN
+                    </h2>
+
+                    <!-- Countdown Grid -->
+                    <div class="grid grid-cols-4 gap-2 mt-5 pt-4 border-t border-gold/25">
+                        <div class="flex flex-col items-center">
+                            <span id="cd-days" class="font-serif text-3xl sm:text-4xl font-semibold text-charcoal tabular-nums">00</span>
+                            <span class="font-display text-[9px] tracking-[0.2em] text-taupe uppercase mt-1">Days</span>
+                        </div>
+                        <div class="flex flex-col items-center border-l border-gold/20">
+                            <span id="cd-hours" class="font-serif text-3xl sm:text-4xl font-semibold text-charcoal tabular-nums">00</span>
+                            <span class="font-display text-[9px] tracking-[0.2em] text-taupe uppercase mt-1">Hours</span>
+                        </div>
+                        <div class="flex flex-col items-center border-l border-gold/20">
+                            <span id="cd-mins" class="font-serif text-3xl sm:text-4xl font-semibold text-charcoal tabular-nums">00</span>
+                            <span class="font-display text-[9px] tracking-[0.2em] text-taupe uppercase mt-1">Minutes</span>
+                        </div>
+                        <div class="flex flex-col items-center border-l border-gold/20">
+                            <span id="cd-secs" class="font-serif text-3xl sm:text-4xl font-semibold text-burgundy tabular-nums">00</span>
+                            <span class="font-display text-[9px] tracking-[0.2em] text-taupe uppercase mt-1">Seconds</span>
+                        </div>
+                    </div>
+
+                    <p class="font-serif italic text-xs text-taupe mt-4">
+                        December 3rd – 6th, 2026
+                    </p>
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 5. GOLDEN MOMENTS — COMPLETE 4-DAY WEDDING ITINERARY      -->
+            <!-- ========================================================= -->
+            <section class="px-5 py-6 reveal-up">
+                <div class="text-center mb-6">
+                    <div class="inline-block bg-burgundy text-ivory px-7 py-2 rounded-full shadow-md border border-gold/40">
+                        <h2 class="font-serif italic text-xl sm:text-2xl tracking-wide text-goldLight">
+                            Golden Moments
+                        </h2>
+                    </div>
+                    <p class="font-display text-[10px] tracking-[0.24em] text-taupe uppercase mt-3">
+                        Wedding Festivities &amp; Schedule
+                    </p>
+                </div>
+
+                <!-- Day Cards Container -->
+                <div class="space-y-4">
+
+                    <!-- DAY 1: THURSDAY, 3rd December 2026 -->
+                    <div class="rounded-2xl bg-ivory/95 border border-gold/40 p-5 shadow-[0_6px_20px_rgba(107,19,36,0.05)] reveal-up">
+                        <div class="flex items-center justify-between border-b border-gold/25 pb-3 mb-3.5">
+                            <div>
+                                <span class="font-display text-[10px] tracking-[0.22em] text-burgundy font-bold uppercase block">
+                                    Thursday
+                                </span>
+                                <h3 class="font-serif font-bold text-lg text-charcoal">
+                                    3rd December 2026
+                                </h3>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-cream text-burgundy font-display text-[10px] tracking-widest border border-gold/30">
+                                DAY 01
+                            </span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm sm:text-base">
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Tel Batna &amp; Ladies Sangeet</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">07:00 a.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Mama Swagat</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">07:30 a.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Mehandi</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">08:00 a.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Shand</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">08:30 a.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Lunch</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">02:00 p.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-medium text-charcoal">Sehra Bandi</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">08:00 p.m.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- DAY 2: FRIDAY, 4th December 2026 -->
+                    <div class="rounded-2xl bg-ivory/95 border border-gold/40 p-5 shadow-[0_6px_20px_rgba(107,19,36,0.05)] reveal-up">
+                        <div class="flex items-center justify-between border-b border-gold/25 pb-3 mb-3.5">
+                            <div>
+                                <span class="font-display text-[10px] tracking-[0.22em] text-burgundy font-bold uppercase block">
+                                    Friday
+                                </span>
+                                <h3 class="font-serif font-bold text-lg text-charcoal">
+                                    4th December 2026
+                                </h3>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-cream text-burgundy font-display text-[10px] tracking-widest border border-gold/30">
+                                DAY 02
+                            </span>
+                        </div>
+
+                        <div class="flex items-baseline justify-between gap-2 text-sm sm:text-base">
+                            <span class="font-serif font-semibold text-charcoal">Departure of Barat</span>
+                            <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                            <span class="font-serif font-semibold text-burgundy whitespace-nowrap">09:00 a.m.</span>
+                        </div>
+                    </div>
+
+                    <!-- DAY 3: SATURDAY, 5th December 2026 -->
+                    <div class="rounded-2xl bg-ivory/95 border border-gold/40 p-5 shadow-[0_6px_20px_rgba(107,19,36,0.05)] reveal-up">
+                        <div class="flex items-center justify-between border-b border-gold/25 pb-3 mb-3.5">
+                            <div>
+                                <span class="font-display text-[10px] tracking-[0.22em] text-burgundy font-bold uppercase block">
+                                    Saturday
+                                </span>
+                                <h3 class="font-serif font-bold text-lg text-charcoal">
+                                    5th December 2026
+                                </h3>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-cream text-burgundy font-display text-[10px] tracking-widest border border-gold/30">
+                                DAY 03
+                            </span>
+                        </div>
+
+                        <div class="flex items-baseline justify-between gap-2 text-sm sm:text-base">
+                            <span class="font-serif font-semibold text-charcoal">Vadhu Pravesh</span>
+                            <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                            <span class="font-serif font-semibold text-burgundy whitespace-nowrap">06:30 p.m.</span>
+                        </div>
+                    </div>
+
+                    <!-- DAY 4: SUNDAY, 6th December 2026 -->
+                    <div class="rounded-2xl bg-ivory/95 border border-gold/40 p-5 shadow-[0_6px_20px_rgba(107,19,36,0.05)] reveal-up">
+                        <div class="flex items-center justify-between border-b border-gold/25 pb-3 mb-3.5">
+                            <div>
+                                <span class="font-display text-[10px] tracking-[0.22em] text-burgundy font-bold uppercase block">
+                                    Sunday
+                                </span>
+                                <h3 class="font-serif font-bold text-lg text-charcoal">
+                                    6th December 2026
+                                </h3>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-cream text-burgundy font-display text-[10px] tracking-widest border border-gold/30">
+                                DAY 04
+                            </span>
+                        </div>
+
+                        <ul class="space-y-2.5 text-sm sm:text-base">
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-semibold text-charcoal">Reception</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">06:30 p.m.</span>
+                            </li>
+                            <li class="flex items-baseline justify-between gap-2">
+                                <span class="font-serif font-semibold text-charcoal">Dinner</span>
+                                <span class="flex-1 border-b border-dotted border-gold/40 mx-1"></span>
+                                <span class="font-serif font-semibold text-burgundy whitespace-nowrap">09:30 p.m.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 6. VENUES & DIRECTIONS SECTION                            -->
+            <!-- ========================================================= -->
+            <section class="px-5 py-6 reveal-up">
+                <div class="text-center mb-6">
+                    <p class="font-display text-[10px] tracking-[0.25em] text-taupe uppercase">
+                        Where We Celebrate Our Love
+                    </p>
+                    <h2 class="font-display text-2xl tracking-[0.14em] text-burgundy font-semibold mt-1">
+                        THE VENUES
+                    </h2>
+                </div>
+
+                <div class="space-y-5">
+                    <!-- Venue 1: Reception Venue -->
+                    <div class="rounded-3xl bg-ivory border border-gold/40 overflow-hidden shadow-[0_10px_28px_rgba(44,34,32,0.07)]">
+                        <div class="relative h-36 bg-[#EFE8DC] overflow-hidden border-b border-gold/25">
+                            <svg class="w-full h-full object-cover" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="150" fill="#F2ECE1"/>
+                                <path d="M-20 110 Q 120 90, 220 120 T 420 85" stroke="#FFFFFF" stroke-width="10"/>
+                                <path d="M140 -10 L 185 160" stroke="#FFFFFF" stroke-width="8"/>
+                                <path d="M290 -10 L 250 160" stroke="#E4DAC9" stroke-width="5"/>
+                                <circle cx="95" cy="55" r="28" fill="#E3E8DC"/>
+                                <circle cx="320" cy="45" r="22" fill="#E3E8DC"/>
+                                <g transform="translate(184, 38)">
+                                    <circle cx="16" cy="48" r="8" fill="#6B1324" fill-opacity="0.18"/>
+                                    <path d="M16 0C7.16 0 0 7.16 0 16C0 28 16 46 16 46C16 46 32 28 32 16C32 7.16 24.84 0 16 0Z" fill="#6B1324"/>
+                                    <circle cx="16" cy="16" r="6" fill="#FAF6F0"/>
+                                </g>
+                            </svg>
+                            <span class="absolute top-3 left-3 bg-burgundy text-goldLight font-serif italic text-xs px-3.5 py-1 rounded-full shadow">
+                                Reception Venue
+                            </span>
+                        </div>
+
+                        <div class="p-5 text-center">
+                            <h3 class="font-display text-lg font-semibold text-charcoal tracking-wide">
+                                M.J. FARM
+                            </h3>
+                            <p class="font-serif text-taupe text-sm mt-1">
+                                Baddli Road, Kharar
+                            </p>
+
+                            <div class="mt-4 grid grid-cols-1 gap-2.5">
+                                <a href="https://www.google.com/maps/search/?api=1&query=M.J.+FARM+Baddli+Road+Kharar" target="_blank" rel="noopener noreferrer" class="w-full py-3 px-4 rounded-xl border border-charcoal/25 bg-cream/60 hover:bg-burgundy hover:text-ivory hover:border-burgundy transition flex items-center justify-center gap-2 font-display text-[11px] tracking-[0.2em] uppercase">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                        <circle cx="12" cy="10" r="3"></circle>
+                                    </svg>
+                                    Get Directions
+                                </a>
+                                <button onclick="downloadICS('Reception - Ritik & Samriti', '20261206T183000', '20261206T230000', 'M.J. FARM, Baddli Road, Kharar')" class="w-full py-3 px-4 rounded-xl border border-charcoal/25 bg-transparent hover:bg-cream transition flex items-center justify-center gap-2 font-display text-[11px] tracking-[0.2em] uppercase text-charcoal">
+                                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    </svg>
+                                    Add Reception to Calendar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Venue 2: Residence / Wedding Festivities -->
+                    <div class="rounded-3xl bg-ivory border border-gold/40 p-5 text-center shadow-[0_8px_24px_rgba(44,34,32,0.05)]">
+                        <span class="inline-block bg-cream text-burgundy border border-gold/30 font-serif italic text-xs px-3.5 py-1 rounded-full mb-2">
+                            Residence Festivities
+                        </span>
+                        <h3 class="font-display text-base font-semibold text-charcoal tracking-wide">
+                            10, PALM CITY
+                        </h3>
+                        <p class="font-serif text-taupe text-sm mt-0.5">
+                            Sector 127, Chandigarh
+                        </p>
+                        <div class="mt-4 flex flex-col sm:flex-row gap-2">
+                            <a href="https://www.google.com/maps/search/?api=1&query=10+Palm+City+Sector+127+Chandigarh" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-3 rounded-xl border border-charcoal/25 bg-cream/60 hover:bg-burgundy hover:text-ivory transition flex items-center justify-center gap-1.5 font-display text-[10px] tracking-[0.18em] uppercase">
+                                Get Directions
+                            </a>
+                            <button onclick="downloadICS('Wedding Festivities - Ritik & Samriti', '20261203T070000', '20261204T110000', '10, Palm City, Sector 127, Chandigarh')" class="flex-1 py-2.5 px-3 rounded-xl border border-charcoal/25 hover:bg-cream transition flex items-center justify-center gap-1.5 font-display text-[10px] tracking-[0.18em] uppercase">
+                                Save Dates
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========================================================= -->
+            <!-- 7. R.S.V.P. & ROYAL ELEPHANT FOOTER                       -->
+            <!-- ========================================================= -->
+            <section class="px-5 pt-6 pb-8 reveal-up">
+                <div class="rounded-3xl bg-gradient-to-b from-cream to-parchment/80 border border-gold/45 p-6 text-center shadow-[0_10px_30px_rgba(107,19,36,0.08)] relative overflow-hidden">
+                    
+                    <!-- Royal Golden Elephant & Lantern Emblem SVG -->
+                    <div class="w-24 h-20 mx-auto mb-2 text-gold">
+                        <svg viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <path d="M25 80 C25 35, 95 35, 95 80" stroke="#B88938" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+                            <path d="M44 74 L44 58 C44 46, 52 38, 64 38 C75 38, 82 45, 82 55 C82 61, 79 65, 76 66 L76 74 L69 74 L69 64 L57 64 L57 74 Z" fill="#B88938" fill-opacity="0.22" stroke="#9E7126" stroke-width="1.5" stroke-linejoin="round"/>
+                            <path d="M44 52 C37 52, 33 57, 33 65 C33 70, 36 73, 39 73 C41 73, 42 71, 41 69 C40 67, 38 66, 39 63 C40 60, 42 59, 44 59" stroke="#9E7126" stroke-width="1.6" stroke-linecap="round"/>
+                            <path d="M54 39 L72 39 L74 55 L52 55 Z" fill="#6B1324" stroke="#B88938" stroke-width="1.2"/>
+                            <rect x="21" y="61" width="8" height="12" rx="1" fill="#FFF3D1" stroke="#9E7126" stroke-width="1.2"/>
+                            <path d="M19 61 L31 61 L25 56 Z" fill="#9E7126"/>
+                            <line x1="16" y1="75" x2="104" y2="75" stroke="#B88938" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <p class="font-serif italic text-burgundy text-lg font-semibold">
+                        R.S.V.P.
+                    </p>
+                    <h2 class="font-display text-2xl font-bold text-charcoal tracking-wider mt-0.5">
+                        Rana Family
+                    </h2>
+
+                    <!-- Direct Tap-to-Call Buttons -->
+                    <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2.5">
+                        <a href="tel:+919216485811" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-burgundy text-ivory hover:bg-burgundyDark transition shadow flex items-center justify-center gap-2 font-sans text-xs font-medium tracking-wider">
+                            <svg class="w-3.5 h-3.5 text-goldLight" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            92164 85811
+                        </a>
+                        <a href="tel:+917508305771" class="w-full sm:w-auto px-5 py-2.5 rounded-full bg-burgundy text-ivory hover:bg-burgundyDark transition shadow flex items-center justify-center gap-2 font-sans text-xs font-medium tracking-wider">
+                            <svg class="w-3.5 h-3.5 text-goldLight" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                            75083 05771
+                        </a>
+                    </div>
+
+                    <!-- Interactive Digital RSVP Form (Sends via WhatsApp or Records Locally) -->
+                    <div class="mt-6 pt-5 border-t border-gold/25">
+                        <p class="font-display text-[10px] tracking-[0.22em] text-taupe uppercase mb-3">
+                            Send Your Blessings &amp; Attendance
+                        </p>
+                        <form id="rsvp-form" class="space-y-2.5 text-left">
+                            <input type="text" id="guest-name" required placeholder="Your Full Name" class="w-full px-4 py-2.5 rounded-xl bg-ivory/90 border border-gold/35 font-serif text-base text-charcoal placeholder:text-taupe/60 focus:outline-none focus:border-burgundy">
+                            <div class="grid grid-cols-2 gap-2">
+                                <select id="guest-count" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory/90 border border-gold/35 font-serif text-base text-charcoal focus:outline-none focus:border-burgundy">
+                                    <option value="1 Guest">1 Guest</option>
+                                    <option value="2 Guests" selected>2 Guests</option>
+                                    <option value="3 Guests">3 Guests</option>
+                                    <option value="4+ Family">4+ Family</option>
+                                </select>
+                                <select id="guest-status" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory/90 border border-gold/35 font-serif text-base text-charcoal focus:outline-none focus:border-burgundy">
+                                    <option value="Joyfully Attending">Joyfully Attending</option>
+                                    <option value="Sending Blessings">Sending Blessings</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-xl bg-charcoal text-goldLight hover:bg-burgundy hover:text-ivory transition font-display text-[11px] tracking-[0.22em] uppercase shadow-md mt-1">
+                                Confirm RSVP via WhatsApp
+                            </button>
+                        </form>
+                        <div id="rsvp-toast" class="hidden mt-3 p-3 rounded-xl bg-burgundy/10 border border-burgundy/30 text-burgundy font-serif text-sm text-center">
+                            Thank you! Opening WhatsApp to send your response...
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Closing Note -->
+                <p class="text-center font-serif italic text-taupe text-sm mt-8">
+                    With love &amp; warm regards — Ritik &amp; Samriti
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        /**
+         * 1. AMBIENT CELEBRATORY HARP / CHIME SYNTHESIZER (Tone.js)
+         */
+        let isMusicPlaying = false;
+        let melodyLoop = null;
+        let polySynth = null;
+
+        async function initAndPlayMusic() {
+            try {
+                await Tone.start();
+                if (!polySynth) {
+                    const reverb = new Tone.Reverb({ decay: 4.5, wet: 0.45 }).toDestination();
+                    polySynth = new Tone.PolySynth(Tone.Synth, {
+                        oscillator: { type: 'sine' },
+                        envelope: {
+                            attack: 0.35,
+                            decay: 1.2,
+                            sustain: 0.3,
+                            release: 2.5
+                        },
+                        volume: -14
+                    }).connect(reverb);
+
+                    const notes = [
+                        ['C4', 'E4', 'G4'],
+                        ['B4'],
+                        ['D5'],
+                        ['F#4', 'A4', 'D5'],
+                        ['G4', 'B4', 'D5'],
+                        ['E5'],
+                        ['D5'],
+                        ['B4', 'G4']
+                    ];
+                    let step = 0;
+                    melodyLoop = new Tone.Loop((time) => {
+                        polySynth.triggerAttackRelease(notes[step % notes.length], '2n', time);
+                        step++;
+                    }, '2n');
+                }
+
+                Tone.Transport.bpm.value = 68;
+                melodyLoop.start(0);
+                Tone.Transport.start();
+                isMusicPlaying = true;
+                updateMusicIcons();
+            } catch (err) {
+                console.warn('Audio initialization skipped:', err);
+            }
+        }
+
+        function toggleMusic() {
+            if (!polySynth) {
+                initAndPlayMusic();
+                return;
+            }
+            if (isMusicPlaying) {
+                Tone.Transport.pause();
+                isMusicPlaying = false;
+            } else {
+                Tone.Transport.start();
+                isMusicPlaying = true;
+            }
+            updateMusicIcons();
+        }
+
+        function updateMusicIcons() {
+            const onIcon = document.getElementById('icon-sound-on');
+            const offIcon = document.getElementById('icon-sound-off');
+            if (isMusicPlaying) {
+                onIcon.classList.remove('hidden');
+                offIcon.classList.add('hidden');
+            } else {
+                onIcon.classList.add('hidden');
+                offIcon.classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('music-toggle-btn').addEventListener('click', toggleMusic);
+
+        /**
+         * 2. NATIVE SHARE / COPY LINK BUTTON
+         */
+        document.getElementById('share-invite-btn').addEventListener('click', async () => {
+            const shareData = {
+                title: 'Ritik & Samriti — Wedding Invitation',
+                text: 'You are cordially invited to the Marriage Ceremony of Ritik & Samriti (Dec 3–6, 2026). Tap the wax seal to open:',
+                url: window.location.href
+            };
+
+            if (navigator.share) {
+                try {
+                    await navigator.share(shareData);
+                } catch (e) {}
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('Invitation link copied! You can now paste it in WhatsApp.');
+            }
+        });
+
+        /**
+         * 3. WAX SEAL ENVELOPE OPENING SEQUENCE
+         */
+        const openSealBtn = document.getElementById('open-seal-btn');
+        const envelopeScreen = document.getElementById('envelope-screen');
+        const tapPrompt = document.getElementById('tap-prompt');
+        const invitationContent = document.getElementById('invitation-content');
+        const floatingControls = document.getElementById('floating-controls');
+
+        openSealBtn.addEventListener('click', () => {
+            initAndPlayMusic();
+
+            envelopeScreen.classList.add('envelope-open');
+            tapPrompt.style.opacity = '0';
+
+            setTimeout(() => {
+                envelopeScreen.style.opacity = '0';
+                invitationContent.classList.remove('opacity-0');
+                floatingControls.classList.remove('opacity-0', 'pointer-events-none');
+                triggerScrollReveals();
+            }, 850);
+
+            setTimeout(() => {
+                envelopeScreen.style.display = 'none';
+            }, 1850);
+        });
+
+        /**
+         * 4. LIVE COUNTDOWN TIMER TO DECEMBER 3, 2026 (07:00 AM IST)
+         */
+        const weddingTargetDate = new Date('2026-12-03T07:00:00+05:30').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingTargetDate - now;
+
+            if (distance <= 0) {
+                document.getElementById('cd-days').textContent = '00';
+                document.getElementById('cd-hours').textContent = '00';
+                document.getElementById('cd-mins').textContent = '00';
+                document.getElementById('cd-secs').textContent = '00';
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        /**
+         * 5. SCROLL REVEAL OBSERVER
+         */
+        function triggerScrollReveals() {
+            const reveals = document.querySelectorAll('.reveal-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            reveals.forEach((el) => observer.observe(el));
+        }
+
+        /**
+         * 6. ADD TO CALENDAR (.ICS DOWNLOADER)
+         */
+        function downloadICS(title, startStr, endStr, location) {
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Ritik & Samriti Wedding//EN',
+                'BEGIN:VEVENT',
+                `SUMMARY:${title}`,
+                `DTSTART:${startStr}`,
+                `DTEND:${endStr}`,
+                `LOCATION:${location}`,
+                'DESCRIPTION:Wedding Ceremony & Celebrations of Ritik & Samriti. RSVP: Rana Family (9216485811, 7508305771)',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${title.replace(/\s+/g, '_')}.ics`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        /**
+         * 7. RSVP VIA WHATSAPP TO RANA FAMILY
+         */
+        document.getElementById('rsvp-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('guest-name').value.trim();
+            const count = document.getElementById('guest-count').value;
+            const status = document.getElementById('guest-status').value;
+
+            const toast = document.getElementById('rsvp-toast');
+            toast.innerHTML = `Thank you, <strong>${name}</strong>! Opening WhatsApp to send your RSVP (${count} — <em>${status}</em>)...`;
+            toast.classList.remove('hidden');
+
+            const msg = encodeURIComponent(
+                `Namaste Rana Family! 🙏\n\nRSVP for *Ritik & Samriti's Wedding*:\n• *Name:* ${name}\n• *Guests:* ${count}\n• *Response:* ${status}\n\nWarmest wishes!`
+            );
+            window.open(`https://wa.me/919216485811?text=${msg}`, '_blank');
+            e.target.reset();
+        });
+    </script>
+</body>
+</html>
