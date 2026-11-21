@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -181,55 +182,63 @@
     <div id="app-shell" class="relative mx-auto w-full max-w-[460px] min-h-screen paper-texture shadow-[0_0_60px_rgba(0,0,0,0.6)] overflow-x-hidden">
 
         <!-- ========================================================= -->
-        <!-- 1. WAX-SEALED ENVELOPE OVERLAY (Tap the Seal to Open)     -->
+        <!-- 1. INTERACTIVE WAX-SEALED ENVELOPE COVER (Initial Screen) -->
         <!-- ========================================================= -->
-        <div id="envelope-screen" class="fixed inset-0 z-50 mx-auto w-full max-w-[460px] h-full envelope-wrapper transition-opacity duration-1000 ease-out flex items-center justify-center overflow-hidden">
+        <div id="envelope-screen" class="fixed inset-0 z-50 mx-auto w-full max-w-[460px] h-full envelope-wrapper envelope-paper flex flex-col items-center justify-between py-12 px-6 transition-opacity duration-1000">
             
-            <!-- Base Backing -->
-            <div class="absolute inset-0 envelope-paper"></div>
-
-            <!-- Envelope Side Flaps -->
-            <div class="absolute inset-0 flap-left bg-[#E8DFD1] shadow-inner"></div>
-            <div class="absolute inset-0 flap-right bg-[#E5DBC9] shadow-inner"></div>
-            
-            <!-- Envelope Bottom Flap -->
-            <div class="absolute inset-0 flap-bottom bg-[#ECE4D7] drop-shadow-[0_-4px_12px_rgba(44,34,32,0.08)]"></div>
-
-            <!-- Envelope Top Flap (Animates Open) -->
-            <div id="envelope-top-flap" class="absolute inset-0 flap-top bg-[#F4EDE2] z-20 drop-shadow-[0_10px_20px_rgba(44,34,32,0.16)]">
-                <!-- Subtle Gold Foil Inner Edge -->
-                <div class="w-full h-full border-b border-gold/30"></div>
+            <!-- Subtle Top Monogram Header -->
+            <div class="text-center z-20 opacity-80">
+                <p class="font-display text-[11px] tracking-[0.28em] text-taupe uppercase">Wedding Invitation</p>
             </div>
 
-            <!-- Interactive Botanical & Monogram Wax Seal -->
-            <button id="open-seal-btn" aria-label="Tap the seal to open wedding invitation" class="wax-seal-btn wax-seal absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-28 h-28 flex items-center justify-center cursor-pointer focus:outline-none group">
-                <div class="wax-seal-inner w-[86px] h-[86px] flex flex-col items-center justify-center relative">
-                    <!-- Embossed Botanical Sprig SVG -->
-                    <svg class="w-12 h-12 text-burgundy/80 drop-shadow-[0_1px_1px_rgba(255,255,255,0.8)] transition-transform duration-500 group-hover:scale-105" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3">
-                        <path d="M32 54C32 40 31 24 33 10" stroke-linecap="round"/>
-                        <path d="M32 42C24 40 19 35 18 29C24 30 29 35 32 42Z" fill="currentColor" fill-opacity="0.15"/>
-                        <path d="M32 34C40 32 45 27 46 21C40 22 35 27 32 34Z" fill="currentColor" fill-opacity="0.15"/>
-                        <path d="M32 25C25 23 21 19 20 14C25 15 29 19 32 25Z" fill="currentColor" fill-opacity="0.15"/>
-                        <path d="M32 18C37 16 41 13 42 9C38 10 34 13 32 18Z" fill="currentColor" fill-opacity="0.15"/>
-                        <circle cx="33" cy="8" r="1.5" fill="currentColor"/>
+            <!-- Envelope Flaps Geometry -->
+            <div class="absolute inset-0 pointer-events-none overflow-hidden">
+                <!-- Left Flap -->
+                <div class="flap-left absolute inset-0 bg-[#E6DDD0] border-r border-black/5 shadow-inner"></div>
+                <!-- Right Flap -->
+                <div class="flap-right absolute inset-0 bg-[#E3D9CB] border-l border-black/5 shadow-inner"></div>
+                <!-- Bottom Flap -->
+                <div class="flap-bottom absolute inset-0 bg-[#EBE3D6] shadow-[0_-8px_25px_rgba(0,0,0,0.06)]"></div>
+                <!-- Top Folding Flap -->
+                <div id="top-flap" class="flap-top absolute inset-0 bg-[#F2ECE2] z-10 border-b border-gold/20"></div>
+            </div>
+
+            <!-- Center Interactive Wax Seal Button -->
+            <button id="open-seal-btn" aria-label="Tap the seal to open wedding invitation" class="wax-seal-btn wax-seal absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center cursor-pointer focus:outline-none group">
+                <div class="wax-seal-inner w-20 h-20 sm:w-24 sm:h-24 flex flex-col items-center justify-center relative">
+                    <svg class="w-12 h-12 sm:w-14 sm:h-14 text-[#5A4D46] opacity-85 group-hover:text-burgundy transition-colors duration-300" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M32 52C32 40 31 24 33 12" />
+                        <path d="M32 42C26 40 21 35 20 29C25 30 29 34 32 39" />
+                        <path d="M32 34C38 32 43 27 44 21C39 22 35 26 32 31" />
+                        <path d="M32 25C27 23 24 19 23 14C27 15 30 18 32 22" />
+                        <path d="M33 18C37 16 40 13 41 9C37 10 35 12 33 15" />
+                        <circle cx="33" cy="10" r="1.5" fill="currentColor" />
                     </svg>
-                    <span class="font-display text-[9px] tracking-[0.22em] text-burgundy/90 font-semibold -mt-1">R &amp; S</span>
+                    <span class="font-display text-[9px] tracking-[0.22em] text-[#5A4D46] font-semibold mt-0.5">R &amp; S</span>
                 </div>
             </button>
 
-            <!-- Bottom Prompt Text -->
-            <div id="tap-prompt" class="absolute bottom-14 inset-x-0 z-30 text-center pointer-events-none transition-opacity duration-500">
-                <p class="font-display text-[11px] tracking-[0.28em] text-charcoal/75 uppercase animate-tap-hint">
+            <!-- Bottom Tap Prompt -->
+            <div id="tap-prompt" class="z-20 text-center animate-tap-hint">
+                <p class="font-display text-xs tracking-[0.26em] text-[#5A4D46] uppercase font-medium">
                     Tap the seal to open
                 </p>
-                <div class="w-8 h-[1px] bg-gold/60 mx-auto mt-2.5"></div>
+                <div class="w-8 h-[1px] bg-gold/60 mx-auto mt-2"></div>
             </div>
         </div>
 
         <!-- ========================================================= -->
-        <!-- 2. FLOATING TOP CONTROLS (Sound & Share Toggle)           -->
+        <!-- 2. FLOATING TOP CONTROLS (Auto-Reel, Share & Sound)       -->
         <!-- ========================================================= -->
         <div id="floating-controls" class="fixed top-4 right-4 sm:right-[calc(50%-212px)] z-40 flex items-center gap-2 opacity-0 pointer-events-none transition-opacity duration-700">
+            <!-- Auto-Play Reel Mode Button -->
+            <button id="auto-reel-btn" title="Auto-Play Smooth Reel for Screen Recording" class="px-3 h-10 rounded-full bg-burgundy text-goldLight border border-gold/40 shadow-md flex items-center gap-1.5 hover:bg-burgundyDark transition active:scale-95 font-display text-[10px] tracking-[0.15em] uppercase">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                Play Reel
+            </button>
+
             <!-- Share Link Button -->
             <button id="share-invite-btn" title="Share Invitation" class="w-10 h-10 rounded-full bg-ivory/90 backdrop-blur-md border border-gold/30 shadow-md flex items-center justify-center text-burgundy hover:bg-cream transition active:scale-95">
                 <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -961,6 +970,55 @@
             window.open(`https://wa.me/919216485811?text=${msg}`, '_blank');
             e.target.reset();
         });
+
+        /**
+         * 8. AUTO-PLAY REEL MODE (Smooth Cinematic Scroll for MP4 Screen Recording)
+         */
+        let reelAnimationId = null;
+        document.getElementById('auto-reel-btn').addEventListener('click', () => {
+            const btn = document.getElementById('auto-reel-btn');
+
+            if (reelAnimationId) {
+                cancelAnimationFrame(reelAnimationId);
+                reelAnimationId = null;
+                btn.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Play Reel`;
+                return;
+            }
+
+            if (!isMusicPlaying) {
+                initAndPlayMusic();
+            }
+
+            btn.innerHTML = `Stop Reel`;
+            window.scrollTo({ top: 0, behavior: 'instant' });
+
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            const duration = 14000; // 14-second smooth reel pan
+            const startTime = performance.now();
+
+            function stepScroll(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Smooth ease-in-out
+                const ease = progress < 0.5
+                    ? 2 * progress * progress
+                    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+
+                window.scrollTo(0, ease * maxScroll);
+
+                if (progress < 1) {
+                    reelAnimationId = requestAnimationFrame(stepScroll);
+                } else {
+                    reelAnimationId = null;
+                    btn.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Play Reel`;
+                }
+            }
+
+            setTimeout(() => {
+                reelAnimationId = requestAnimationFrame(stepScroll);
+            }, 600);
+        });
     </script>
 </body>
 </html>
+```
